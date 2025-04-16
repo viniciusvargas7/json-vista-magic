@@ -38,23 +38,27 @@ const Index = () => {
   };
 
   return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6">JSON Vista Magic</h1>
+    <div className="container mx-auto p-6 bg-[#C8C8C9] bg-opacity-20">
+      <h1 className="text-2xl font-bold mb-6 text-[#403E43]">JSON Vista Magic</h1>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <div className="border rounded-lg p-4">
-          <h2 className="text-lg font-semibold mb-4">JSON de Entrada</h2>
+        <div className="border rounded-lg p-4 bg-[#9F9EA1] bg-opacity-10 border-[#8A898C]">
+          <h2 className="text-lg font-semibold mb-4 text-[#221F26]">JSON de Entrada</h2>
           <JsonInput value={inputJson} onChange={setInputJson} />
         </div>
         
-        <div className="border rounded-lg p-4">
-          <h2 className="text-lg font-semibold mb-4">JSON Formatado</h2>
+        <div className="border rounded-lg p-4 bg-[#9F9EA1] bg-opacity-10 border-[#8A898C]">
+          <h2 className="text-lg font-semibold mb-4 text-[#221F26]">JSON Formatado</h2>
           <JsonViewer jsonData={formattedJson} />
         </div>
       </div>
       
       <div className="max-w-xs mx-auto">
-        <FormatButton onClick={handleFormat} disabled={!inputJson.trim()} />
+        <FormatButton 
+          onClick={handleFormat} 
+          disabled={!inputJson.trim()} 
+          className="bg-[#0FA0CE] hover:bg-[#33C3F0] text-white"
+        />
       </div>
     </div>
   );
