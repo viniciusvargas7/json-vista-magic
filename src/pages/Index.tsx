@@ -39,10 +39,10 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       <Header />
-      <div className="container mx-auto p-6 bg-[#C8C8C9] bg-opacity-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 h-[600px]">
+      <div className="container mx-auto p-6 bg-[#C8C8C9] bg-opacity-20 flex-grow">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 h-[calc(100%-4rem)]">
           <div className="border rounded-lg p-4 bg-[#9F9EA1] bg-opacity-10 border-[#8A898C] h-full">
             <h2 className="text-lg font-semibold mb-4 text-[#221F26]">JSON de Entrada</h2>
             <div className="h-[calc(100%-4rem)]">
@@ -58,7 +58,7 @@ const Index = () => {
           </div>
         </div>
         
-        <div className="max-w-xs mx-auto">
+        <div className="flex justify-center mt-6">
           <FormatButton 
             onClick={handleFormat} 
             disabled={!inputJson.trim()} 
