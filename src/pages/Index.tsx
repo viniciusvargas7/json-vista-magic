@@ -3,6 +3,7 @@ import { useState } from "react";
 import JsonInput from "@/components/JsonInput";
 import JsonViewer from "@/components/JsonViewer";
 import FormatButton from "@/components/FormatButton";
+import Header from "@/components/Header";
 import { useToast } from "@/components/ui/use-toast";
 
 const Index = () => {
@@ -38,27 +39,32 @@ const Index = () => {
   };
 
   return (
-    <div className="container mx-auto p-6 bg-[#C8C8C9] bg-opacity-20">
-      <h1 className="text-2xl font-bold mb-6 text-[#403E43]">JSON Vista Magic</h1>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <div className="border rounded-lg p-4 bg-[#9F9EA1] bg-opacity-10 border-[#8A898C]">
-          <h2 className="text-lg font-semibold mb-4 text-[#221F26]">JSON de Entrada</h2>
-          <JsonInput value={inputJson} onChange={setInputJson} />
+    <div className="min-h-screen">
+      <Header />
+      <div className="container mx-auto p-6 bg-[#C8C8C9] bg-opacity-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 h-[600px]">
+          <div className="border rounded-lg p-4 bg-[#9F9EA1] bg-opacity-10 border-[#8A898C] h-full">
+            <h2 className="text-lg font-semibold mb-4 text-[#221F26]">JSON de Entrada</h2>
+            <div className="h-[calc(100%-4rem)]">
+              <JsonInput value={inputJson} onChange={setInputJson} />
+            </div>
+          </div>
+          
+          <div className="border rounded-lg p-4 bg-[#9F9EA1] bg-opacity-10 border-[#8A898C] h-full">
+            <h2 className="text-lg font-semibold mb-4 text-[#221F26]">JSON Formatado</h2>
+            <div className="h-[calc(100%-4rem)]">
+              <JsonViewer jsonData={formattedJson} />
+            </div>
+          </div>
         </div>
         
-        <div className="border rounded-lg p-4 bg-[#9F9EA1] bg-opacity-10 border-[#8A898C]">
-          <h2 className="text-lg font-semibold mb-4 text-[#221F26]">JSON Formatado</h2>
-          <JsonViewer jsonData={formattedJson} />
+        <div className="max-w-xs mx-auto">
+          <FormatButton 
+            onClick={handleFormat} 
+            disabled={!inputJson.trim()} 
+            className="bg-[#0FA0CE] hover:bg-[#33C3F0] text-white"
+          />
         </div>
-      </div>
-      
-      <div className="max-w-xs mx-auto">
-        <FormatButton 
-          onClick={handleFormat} 
-          disabled={!inputJson.trim()} 
-          className="bg-[#0FA0CE] hover:bg-[#33C3F0] text-white"
-        />
       </div>
     </div>
   );

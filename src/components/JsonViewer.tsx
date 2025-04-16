@@ -1,6 +1,8 @@
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { ChevronDown, ChevronRight } from "lucide-react";
+import { useState } from "react";
 
 interface JsonViewerProps {
   jsonData: any;
@@ -15,20 +17,34 @@ const JsonViewer = ({ jsonData }: JsonViewerProps) => {
     }
   };
 
-  const renderTree = (data: any, level = 0) => {
+  const TreeNode = ({ data, label }: { data: any; label?: string }) => {
+    const [isOpen, setIsOpen] = useState(true);
+    
     if (typeof data !== "object" || data === null) {
-      return <span className="text-blue-600">{JSON.stringify(data)}</span>;
+      return (
+        <div className="flex items-center gap-2">
+          {label && <span className="text-gray-700">{label}: </span>}
+          <span className="text-blue-600">{JSON.stringify(data)}</span>
+        </div>
+      );
     }
 
     return (
-      <div style={{ marginLeft: level * 20 }}>
-        {Object.entries(data).map(([key, value], index) => (
-          <div key={index} className="my-1">
-            <span className="text-gray-700">{key}: </span>
-            {renderTree(value, level + 1)}
-          </div>
-        ))}
-      </div>
+      <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+        <div className="flex items-center gap-1">
+          <CollapsibleTrigger className="hover:bg-gray-100 rounded p-1">
+            {isOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+          </CollapsibleTrigger>
+          {label && <span className="text-gray-700">{label}</span>}
+        </div>
+        <CollapsibleContent className="ml-4">
+          {Object.entries(data).map(([key, value], index) => (
+            <div key={index} className="my-1">
+              <TreeNode data={value} label={key} />
+            </div>
+          ))}
+        </CollapsibleContent>
+      </Collapsible>
     );
   };
 
@@ -72,7 +88,7 @@ const JsonViewer = ({ jsonData }: JsonViewerProps) => {
       <ScrollArea className="h-[500px]">
         <TabsContent value="tree" className="m-0">
           <div className="p-4 font-mono bg-white rounded-md">
-            {renderTree(jsonData)}
+            <TreeNode data={jsonData} />
           </div>
         </TabsContent>
         
