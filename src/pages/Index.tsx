@@ -4,6 +4,7 @@ import JsonInput from "@/components/JsonInput";
 import JsonViewer from "@/components/JsonViewer";
 import FormatButton from "@/components/FormatButton";
 import Header from "@/components/Header";
+import DownloadButton from "@/components/DownloadButton";
 import { useToast } from "@/components/ui/use-toast";
 
 const Index = () => {
@@ -58,12 +59,14 @@ const Index = () => {
           </div>
         </div>
         
-        <div className="flex justify-center mt-6">
+        <div className="flex flex-col items-center mt-6">
           <FormatButton 
             onClick={handleFormat} 
             disabled={!inputJson.trim()} 
             className="bg-[#0FA0CE] hover:bg-[#33C3F0] text-white"
           />
+          
+          <DownloadButton />
         </div>
       </div>
     </div>
